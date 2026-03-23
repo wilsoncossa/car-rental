@@ -1,7 +1,3 @@
-"engines": {
-  "node": "20.x"
-}
-
 {
   "name": "car-rental-system",
   "version": "1.0.0",
