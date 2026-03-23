@@ -32,7 +32,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useCreateBooking } from "@/hooks/use-bookings";
-import { type Car } from "@shared/schema";
+import { type Car } from "@shared/types";
 import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";

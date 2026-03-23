@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { type Car } from "@shared/schema";
+import { type Car } from "@shared/types";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";

@@ -16,7 +16,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useCreateCar, useUpdateCar, useDeleteCar } from "@/hooks/use-cars";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Plus, Pencil, Trash2, Upload, ImageIcon, X } from "lucide-react";
-import type { Car } from "@shared/schema";
+import type { Car } from "@shared/types";
 
 const carFormSchema = z.object({
   make: z.string().min(1, "Marca é obrigatória"),
