@@ -6,6 +6,3 @@ cmds = ["yarn install --frozen-lockfile"]
 
 [phases.build]
 cmds = ["yarn run build"]
-
-[phases.start]
-cmds = ["NODE_ENV=production yarn run start"]
