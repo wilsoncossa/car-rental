@@ -3,10 +3,10 @@ FROM node:22-bullseye AS builder
 WORKDIR /app
 
 # Copiar somente manifestos e lockfiles primeiro para aproveitar layer cache
-COPY package.json yarn.lock .
+COPY package.json package-lock.json .
 
-# Instala dependências (Yarn)
-RUN yarn install --frozen-lockfile
+# Instala dependências usando npm (lockfile v2 já no repo)
+RUN npm ci
 
 # Copiar código fonte
 COPY . .
