@@ -5,25 +5,25 @@ WORKDIR /app
 # Copiar somente manifestos e lockfiles primeiro para aproveitar layer cache
 COPY package.json package-lock.json .
 
-# Instala dependÃªncias usando npm (lockfile v2 jÃ¡ no repo)
+# Instala dependências usando npm (lockfile v2 já no repo)
 RUN npm ci
 
-# Copiar cÃ³digo fonte
+# Copiar código fonte
 COPY . .
 
 # Build do projeto (client + server bundle via script/build.ts)
-RUN yarn run build
+RUN npm run build
 
 # Stage 2: runtime leve
 FROM node:22-bullseye AS runtime
 WORKDIR /app
 
-# SÃ³ copiar artefatos de produÃ§Ã£o
+# Só copiar artefatos de produção
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules
 
-# Porta padrÃ£o (ajustar conforme app)
+# Porta padrão (ajustar conforme app)
 EXPOSE 3000
 
 # Rodar servidor express empaquetado

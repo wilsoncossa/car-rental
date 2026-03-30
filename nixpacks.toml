@@ -1,11 +1,8 @@
 [phases.setup]
-packages = ["nodejs_22", "yarn-1_x", "openssl"]
+packages = ["nodejs_22", "openssl"]
 
 [phases.install]
-cmds = ["yarn install --frozen-lockfile"]
+cmds = ["npm ci"]
 
 [phases.build]
-cmds = ["yarn run build"]
-
-[phases.start]
-cmds = ["NODE_ENV=production yarn run start"]
+cmds = ["npm run build"]
