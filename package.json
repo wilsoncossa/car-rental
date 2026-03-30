@@ -12,7 +12,7 @@
     "db:push": "node ./node_modules/tsx/dist/cli.mjs --env-file=.env ./node_modules/drizzle-kit/bin.cjs push",
     "db:studio": "node ./node_modules/tsx/dist/cli.mjs --env-file=.env ./node_modules/drizzle-kit/bin.cjs studio",
     "clean": "rm -rf dist node_modules",
-    "fresh-install": "yarn clean && yarn install"
+    "fresh-install": "npm run clean && npm install"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
