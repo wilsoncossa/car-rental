@@ -1,22 +1,30 @@
-# Updated Dockerfile
+# Stage 1: dependencies + build
+FROM node:22-bullseye AS builder
+WORKDIR /app
 
-# Use the official Node.js image.
-FROM node:14
+# Copiar somente manifestos e lockfiles primeiro para aproveitar layer cache
+COPY package.json package-lock.json .
 
-# Set the working directory.
-WORKDIR /usr/src/app
+# Instala dependências usando npm (lockfile v2 já no repo)
+RUN npm ci
 
-# Copy package.json and package-lock.json.
-COPY package*.json ./
-
-# Install dependencies.
-RUN npm install
-
-# Copy the rest of the application code.
+# Copiar código fonte
 COPY . .
 
-# Expose the application port.
+# Build do projeto (client + server bundle via script/build.ts)
+RUN npm run build
+
+# Stage 2: runtime leve
+FROM node:22-bullseye AS runtime
+WORKDIR /app
+
+# Só copiar artefatos de produção
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules
+
+# Porta padrão (ajustar conforme app)
 EXPOSE 3000
 
-# Start the application.
-CMD [ "node", "server.js" ]
+# Rodar servidor express empaquetado
+CMD ["node", "dist/index.cjs"]
