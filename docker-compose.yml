@@ -5,7 +5,26 @@ services:
       - "3000:3000"
     env_file:
       - .env
+    environment:
+      # Override para usar o Postgres do compose
+      - DATABASE_URL=postgresql://car:53837425@db:5432/car
+    depends_on:
+      - db
     restart: unless-stopped
-    # Add volumes if needed, e.g. to persist uploads:
     # volumes:
     #   - ./uploads:/app/uploads
+
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=car
+      - POSTGRES_PASSWORD=53837425
+      - POSTGRES_DB=car
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
