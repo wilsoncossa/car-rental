@@ -1,30 +1,22 @@
-# Stage 1: dependencies + build
-FROM node:22-bullseye AS builder
-WORKDIR /app
+# Dockerfile
 
-# Copiar somente manifestos e lockfiles primeiro para aproveitar layer cache
-COPY package.json yarn.lock .
+# Use a Node.js base image
+FROM node:14
 
-# Instala dependências (Yarn)
-RUN yarn install --frozen-lockfile
+# Set the working directory
+WORKDIR /usr/src/app
 
-# Copiar código fonte
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies using npm
+RUN npm install
+
+# Copy the rest of the application code
 COPY . .
 
-# Build do projeto (client + server bundle via script/build.ts)
-RUN yarn run build
+# Expose the port the app runs on
+EXPOSE 8080
 
-# Stage 2: runtime leve
-FROM node:22-bullseye AS runtime
-WORKDIR /app
-
-# Só copiar artefatos de produção
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/node_modules ./node_modules
-
-# Porta padrão (ajustar conforme app)
-EXPOSE 3000
-
-# Rodar servidor express empaquetado
-CMD ["node", "dist/index.cjs"]
+# Command to run the application
+CMD [ "npm", "start" ]
