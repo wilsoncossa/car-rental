@@ -1,8 +1,7 @@
-[phases.setup]
-packages = ["nodejs_22", "openssl"]
+# Updated npm configuration
 
-[phases.install]
-cmds = ["npm ci"]
-
-[phases.build]
-cmds = ["npm run build"]
+# This configuration keeps npm settings consistent across branches.
+npmConfig = { 
+  registry = "https://registry.npmjs.org/" 
+  // Add other npm config settings here 
+}
