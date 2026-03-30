@@ -6,25 +6,38 @@ services:
     env_file:
       - .env
     environment:
-      # Override para usar o Postgres do compose
-      - DATABASE_URL=postgresql://car:53837425@db:5432/car
+      NODE_ENV: production
+      DATABASE_URL: postgresql://car:53837425@db:5432/car
     depends_on:
       - db
     restart: unless-stopped
+    networks:
+      - car-rental-network
     # volumes:
     #   - ./uploads:/app/uploads
 
   db:
-    image: postgres:15
-    restart: unless-stopped
+    image: postgres:15-alpine
     environment:
-      - POSTGRES_USER=car
-      - POSTGRES_PASSWORD=53837425
-      - POSTGRES_DB=car
+      POSTGRES_USER: car
+      POSTGRES_PASSWORD: 53837425
+      POSTGRES_DB: car
     ports:
       - "5432:5432"
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U "]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - car-rental-network
+
+networks:
+  car-rental-network:
+    driver: bridge
 
 volumes:
-  db_data:
+  postgres_data:
