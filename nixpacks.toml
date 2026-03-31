@@ -1,4 +1,4 @@
-[phases.setup]
+# Runtime packages
 packages = ["nodejs_22", "npm-10_x", "openssl"]
 
 [phases.install]
@@ -7,5 +7,5 @@ cmds = ["npm ci"]
 [phases.build]
 cmds = ["npm run build"]
 
-[start]
-cmd = "npm run db:push && npm start"
+# Run migrations on start, then boot the app
+start = "npm run db:push && npm start"
