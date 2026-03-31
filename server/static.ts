@@ -16,6 +16,12 @@ export function serveStatic(app: Express) {
     app.use("/uploads", express.static(uploadsPath));
   }
 
+  // Serve built public assets (images, icons, etc.) explicitly
+  const imagesPath = path.resolve(distPath, "images");
+  if (fs.existsSync(imagesPath)) {
+    app.use("/images", express.static(imagesPath));
+  }
+
   app.use(express.static(distPath, {
     maxAge: "1y",
     immutable: true,
