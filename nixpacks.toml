@@ -8,4 +8,4 @@ cmds = ["npm ci"]
 cmds = ["npm run build"]
 
 # Run migrations on start, then boot the app
-start = "npm run db:push && npm start"
+start = "npm run db:push && npm run seed && npm start"

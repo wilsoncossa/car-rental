@@ -128,6 +128,19 @@ export async function seedDatabase() {
   await seedFleet();
 }
 
+// Allow running this file directly: `npm run seed`
+if (import.meta.main) {
+  seedDatabase()
+    .then(() => {
+      console.log("[seed] Completed successfully");
+      process.exit(0);
+    })
+    .catch((err) => {
+      console.error("[seed] Failed:", err);
+      process.exit(1);
+    });
+}
+
 async function seedAdminUser() {
   const adminId = "55012308";
   const adminEmail = "admin@umbrella.com";

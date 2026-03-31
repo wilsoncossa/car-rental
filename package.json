@@ -11,6 +11,7 @@
     "check": "tsc",
     "db:push": "drizzle-kit push --config drizzle.config.ts",
     "db:studio": "drizzle-kit studio --config drizzle.config.ts",
+    "seed": "tsx --env-file=.env server/seed.ts",
     "clean": "rm -rf dist node_modules",
     "fresh-install": "npm run clean && npm install"
   },
