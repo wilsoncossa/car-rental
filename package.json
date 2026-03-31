@@ -9,8 +9,8 @@
     "build": "node ./node_modules/tsx/dist/cli.mjs script/build.ts",
     "start": "node dist/index.cjs",
     "check": "tsc",
-    "db:push": "node ./node_modules/tsx/dist/cli.mjs --env-file=.env ./node_modules/drizzle-kit/bin.cjs push",
-    "db:studio": "node ./node_modules/tsx/dist/cli.mjs --env-file=.env ./node_modules/drizzle-kit/bin.cjs studio",
+    "db:push": "tsx --env-file=.env ./node_modules/drizzle-kit/bin.cjs push",
+    "db:studio": "tsx --env-file=.env ./node_modules/drizzle-kit/bin.cjs studio",
     "clean": "rm -rf dist node_modules",
     "fresh-install": "npm run clean && npm install"
   },
