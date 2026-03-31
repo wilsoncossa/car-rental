@@ -125,7 +125,35 @@ const FLEET_DATA = [
 
 export async function seedDatabase() {
   await seedAdminUser();
+  await seedDemoUser();
   await seedFleet();
+}
+
+async function seedDemoUser() {
+  const demoEmail = "demo@car.local";
+  const demoPassword = "Demo@123";
+
+  try {
+    const existing = await db.select().from(users).where(eq(users.email, demoEmail));
+    if (existing.length > 0) {
+      return;
+    }
+
+    const passwordHash = await bcrypt.hash(demoPassword, 10);
+    await db.insert(users).values({
+      email: demoEmail,
+      passwordHash,
+      firstName: "Demo",
+      lastName: "User",
+      role: "cliente",
+      status: "active",
+      profileCompleted: "true",
+    }).onConflictDoNothing();
+
+    console.log("[seed] Demo user created:", demoEmail, "/", demoPassword);
+  } catch (error) {
+    console.error("[seed] Error creating demo user:", error);
+  }
 }
 
 // Allow running this file directly: `npm run seed`
