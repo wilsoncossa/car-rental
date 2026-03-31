@@ -1,5 +1,5 @@
 [phases.setup]
-packages = ["nodejs_22", "openssl"]
+packages = ["nodejs_22", "npm-10_x", "openssl"]
 
 [phases.install]
 cmds = ["npm ci"]
