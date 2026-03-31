@@ -7,7 +7,7 @@ services:
       - .env
     environment:
       NODE_ENV: production
-      DATABASE_URL: postgresql://car:53837425@db:5432/car
+      DATABASE_URL: postgresql://car:56837425@vdd-car-vydzch:5432/car
     depends_on:
       - db
     restart: unless-stopped
