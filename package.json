@@ -9,8 +9,8 @@
     "build": "node ./node_modules/tsx/dist/cli.mjs script/build.ts",
     "start": "node dist/index.cjs",
     "check": "tsc",
-    "db:push": "drizzle-kit push --config drizzle.config.ts --env .env",
-    "db:studio": "drizzle-kit studio --config drizzle.config.ts --env .env",
+    "db:push": "drizzle-kit push --config drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config drizzle.config.ts",
     "clean": "rm -rf dist node_modules",
     "fresh-install": "npm run clean && npm install"
   },
