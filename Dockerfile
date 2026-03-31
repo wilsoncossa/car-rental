@@ -20,6 +20,7 @@ WORKDIR /app
 
 # Só copiar artefatos de produção
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/server
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules
 
