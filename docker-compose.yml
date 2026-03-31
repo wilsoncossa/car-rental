@@ -13,8 +13,8 @@ services:
     restart: unless-stopped
     networks:
       - car-rental-network
-    # volumes:
-    #   - ./uploads:/app/uploads
+    volumes:
+      - uploads_data:/app/uploads
 
   db:
     image: postgres:15-alpine
@@ -41,3 +41,4 @@ networks:
 
 volumes:
   postgres_data:
+  uploads_data:
