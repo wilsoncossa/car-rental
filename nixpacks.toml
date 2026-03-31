@@ -5,7 +5,11 @@ packages = ["nodejs_22", "openssl"]
 cmds = ["npm ci"]
 
 [phases.build]
-cmds = ["npm run build"]
+cmds = [
+  # garante que o schema do Postgres exista antes de seed/start
+  "npm run db:push",
+  "npm run build"
+]
 
 [start]
 cmd = "npm start"
